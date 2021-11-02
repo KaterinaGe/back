@@ -1,16 +1,29 @@
-import mongoose from "mongoose";
+import fs from "fs";
 
-const id = Math.random
-const date = new Date
+const Post = (todos) => {
+    todos = JSON.stringify(todos)
+    try {
+        fs.writeFileSync("Todos.json", todos)
+    } catch (e) {
+        res.status(500).json(e)
+    }
+}
 
-const Post = new mongoose.Schema({
-    uuid: {id},
-    name: {
-        type: String, 
-        required: true
-        },
-    created_at: {date},
-    done: {type: Boolean}
-})
+export default Post
 
-export default mongoose.model('Post', Post)
+
+
+
+
+// import mongoose from "mongoose";
+
+// const id = Math.random
+
+// const Post = new mongoose.Schema({
+//     uuid: {id},
+//     name: String,
+//     created_at: {type: Date, default: Date.now},
+//     done: Boolean
+// })
+
+// export default mongoose.model('Post', Post)
