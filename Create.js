@@ -1,4 +1,3 @@
-import fs from "fs";
 import {write, read} from "./helper.js";
 import { v4 as uuidv4 } from "uuid";
 
@@ -13,6 +12,7 @@ const Create = async (todos, req, res) => {
             created_at: new Date()
         }
 
+        read(todos)
         todos.push(todo);
         console.log(123);
         write(todos)

@@ -1,5 +1,4 @@
-import Post from "./helper.js"
-import fs from "fs"
+import {write, read} from "./helper.js"
 
 const file = "Todos.json"
 
@@ -7,11 +6,9 @@ const Delete = async (req, res) => {
     try {
         const uuid = req.params.uuid
         let todos = []
-        fs.readFile(file, (e, data) => {
-            todos = JSON.parse(data)
-            const filteredTodos = todos.filter((todo) => todo.uuid !== uuid)
-            Post(filteredTodos)
-        })
+        read(todos)
+        const filteredTodos = todos.filter((todo) => todo.uuid !== uuid)
+        write(filteredTodos)
     } catch (e) {
         res.status(500).json(e)
     }

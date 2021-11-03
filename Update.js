@@ -1,5 +1,4 @@
-import Post from "./helper.js"
-import fs from "fs"
+import {write, read} from "./helper.js"
 
 const file = "Todos.json"
 
@@ -9,18 +8,17 @@ const Update = async (req, res) => {
         const name = req.body.name
         const done = req.body.done
         let todos = []
-        fs.readFile(file, (e, data) => {
-            todos = JSON.parse(data)
-            todos = todos.map((todo) => {
-                if (todo.uuid === uuid) {
-                    todo.name = name
-                    todo.done = done
-                }
-                return todo
-            })
-            res.send(todos)
-            Post(todos)
+        write(todos)
+        todos = todos.map((todo) => {
+            if (todo.uuid === uuid) {
+                todo.name = name
+                todo.done = done
+            }
+           return todo
         })
+        res.send(todos)
+        read(todos)
+    
     } catch (e) {
         res.status(500).json(e)
         return res.status(500).json({

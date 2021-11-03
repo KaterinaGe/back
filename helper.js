@@ -13,9 +13,7 @@ const read = (todos) => {
     })
 }
 
-
-
-export default {write, read}
+export {write, read}
 
 
 
