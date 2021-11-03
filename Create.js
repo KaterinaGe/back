@@ -1,14 +1,15 @@
 import fs from "fs";
 import Post from "./Post.js";
+import { v4 as uuidv4 } from "uuid";
 
 const file = "Todos.json"
 
 const Create = async (req, res) => {
     try {
-        const id = Number(new Date())
+        const id = uuidv4()
         const name = req.body.name
         const date = new Date()
-        const todos = []
+        let todos = []
 
         const todo = {
             uuid: id,
@@ -17,14 +18,14 @@ const Create = async (req, res) => {
             created_at: date
         }
 
-        fs.readFile(file, (data) => {
+        fs.readFile(file, (e, data) => {
             todos = JSON.parse(data);
             todos.push(todo);
             res.send(todo);
             Post(todos)
         })
     } catch (e) {
-        res.status(500).json(e)
+        res.status(500).send(e)
     }
 
 

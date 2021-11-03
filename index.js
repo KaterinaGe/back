@@ -13,7 +13,7 @@ app.use('/', router)
 // async function startApp() {
 //     try {
 //         await mongoose.connect(DB_URL, {useUnifiedTopology: true, useNewUrlParser: true})
-        app.listen(PORT, () => console.log('its working ' + PORT))
+        app.listen(PORT, () => console.log('Its working ' + PORT))
 //     } catch (e) {
 //         console.log(e)
 //     }

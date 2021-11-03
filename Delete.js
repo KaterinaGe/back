@@ -6,18 +6,16 @@ const file = "Todos.json"
 const Delete = async (req, res) => {
     try {
         const uuid = req.params.uuid
-        const todos = []
-        fs.readFile(file, (data) => {
+        let todos = []
+        fs.readFile(file, (e, data) => {
             todos = JSON.parse(data)
             const filteredTodos = todos.filter((todo) => todo.uuid !== uuid)
-            res.send(filteredTodos)
             Post(filteredTodos)
         })
     } catch (e) {
         res.status(500).json(e)
     }
     
-
 
     // try {
     //     const {id} = req.params

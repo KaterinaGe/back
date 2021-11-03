@@ -6,7 +6,7 @@ import Delete from './Delete.js';
 
 const router = express.Router()
 
-router.post('/todos', Create)
+router.post('/todo', Create)
 router.get('/todos', GetAll)
 router.put('/todos/:uuid', Update)
 router.delete('/todos/:uuid', Delete)

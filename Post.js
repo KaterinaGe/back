@@ -1,6 +1,6 @@
 import fs from "fs";
 
-const Post = (todos) => {
+const Post = async (todos) => {
     todos = JSON.stringify(todos)
     try {
         fs.writeFileSync("Todos.json", todos)

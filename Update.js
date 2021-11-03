@@ -8,8 +8,8 @@ const Update = async (req, res) => {
         const uuid = req.params.uuid
         const name = req.body.name
         const done = req.body.done
-        const todos = []
-        fs.readFile(file, (data) => {
+        let todos = []
+        fs.readFile(file, (e, data) => {
             todos = JSON.parse(data)
             todos = todos.map((todo) => {
                 if (todo.uuid === uuid) {
@@ -23,6 +23,10 @@ const Update = async (req, res) => {
         })
     } catch (e) {
         res.status(500).json(e)
+        return res.status(500).json({
+            message: 'File Write Failed',
+            error: err
+        });
     }
 
 
