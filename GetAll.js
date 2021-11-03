@@ -28,12 +28,6 @@ const GetAll = async (req, res) => {
         })
     } catch (e) {
         res.status(404).json(e)
-        return send({
-            res,
-            statusCode: 404,
-            message: 'ID not found',
-            error: 'Send Valid ID'
-        })
     }
 
 

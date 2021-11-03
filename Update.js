@@ -1,4 +1,4 @@
-import Post from "./Post.js"
+import Post from "./helper.js"
 import fs from "fs"
 
 const file = "Todos.json"

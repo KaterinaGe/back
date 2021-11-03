@@ -1,15 +1,21 @@
 import fs from "fs";
 
-const Post = async (todos) => {
+const write = todos => {
     todos = JSON.stringify(todos)
-    try {
-        fs.writeFileSync("Todos.json", todos)
-    } catch (e) {
-        res.status(500).json(e)
-    }
+    console.log(55555555555555);
+    throw new Error('DB not responding');
+    fs.writeFileSync("Todos.json", todos)
 }
 
-export default Post
+const read = (todos) => {
+    fs.readFile(file, (e, data) => {            
+        todos = JSON.parse(data);
+    })
+}
+
+
+
+export default {write, read}
 
 
 

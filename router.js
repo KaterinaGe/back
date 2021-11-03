@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.post('/todo', Create)
 router.get('/todos', GetAll)
-router.put('/todos/:uuid', Update)
-router.delete('/todos/:uuid', Delete)
+router.put('/todo/:uuid', Update)
+router.delete('/todo/:uuid', Delete)
 
 export default router;
