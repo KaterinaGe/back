@@ -6,9 +6,14 @@ const Delete = async (req, res) => {
     try {
         const uuid = req.params.uuid
         let todos = []
-        read(todos)
-        const filteredTodos = todos.filter((todo) => todo.uuid !== uuid)
-        write(filteredTodos)
+        read().then(response => {
+            todos = todos.concat(response)
+            const filteredTodos = todos.filter((todo) => todo.uuid !== uuid)
+            write(filteredTodos)
+        })
+            .catch(err => console.log('2', err));
+
+        
     } catch (e) {
         res.status(500).json(e)
     }

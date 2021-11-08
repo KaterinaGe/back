@@ -8,23 +8,23 @@ const Update = async (req, res) => {
         const name = req.body.name
         const done = req.body.done
         let todos = []
-        write(todos)
-        todos = todos.map((todo) => {
-            if (todo.uuid === uuid) {
-                todo.name = name
-                todo.done = done
-            }
-           return todo
+        
+        read().then(response => {
+            todos = todos.concat(response)
+            todos = todos.map((todo) => {
+                if (todo.uuid === uuid) {
+                    todo.name = name
+                    todo.done = done
+                }
+                return todo
+            })
+            write(todos)
+            res.send(todos)
         })
-        res.send(todos)
-        read(todos)
+            .catch(err => console.log('2', err));
     
     } catch (e) {
         res.status(500).json(e)
-        return res.status(500).json({
-            message: 'File Write Failed',
-            error: err
-        });
     }
 
 

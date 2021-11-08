@@ -1,15 +1,26 @@
 import fs from "fs";
 
+const file = "Todos.json"
+
 const write = todos => {
     todos = JSON.stringify(todos)
-    console.log(55555555555555);
-    throw new Error('DB not responding');
-    fs.writeFileSync("Todos.json", todos)
+    console.log(55555555555555);  
+    fs.writeFileSync(file, todos)
 }
 
-const read = (todos) => {
-    fs.readFile(file, (e, data) => {            
-        todos = JSON.parse(data);
+function read () {
+    return new Promise (function (resolve, reject) {
+        let todos
+        fs.readFile(file, (e, data) => { 
+            console.log(11111111111111);             
+            todos = JSON.parse(data);
+            if (e) {
+                reject("error")
+            } else {
+                resolve(todos)
+            }
+            
+        })
     })
 }
 

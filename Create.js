@@ -1,10 +1,9 @@
-import {write, read} from "./helper.js";
+import { write, read } from "./helper.js";
 import { v4 as uuidv4 } from "uuid";
 
-const file = "Todos.json"
-
-const Create = async (todos, req, res) => {
-    try {        
+const Create = async (req, res) => {
+    try {
+        let todos = []
         const todo = {
             uuid: uuidv4(),
             name: req.body.name,
@@ -12,15 +11,15 @@ const Create = async (todos, req, res) => {
             created_at: new Date()
         }
 
-        read(todos)
-        todos.push(todo);
-        console.log(123);
-        write(todos)
-        console.log(333333333333333);
-        res.send(todo);            
+        read().then(response => {
+            todos = todos.concat(response)
+            todos.push(todo);
+            write(todos)
+            res.send({todo});
+            })
+            .catch(err => console.log('2', err));
         
     } catch (e) {
-        console.log(66666666788777);  
         res.status(500).send(e)
     }
 
