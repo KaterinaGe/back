@@ -1,24 +1,21 @@
 import {write, read} from "./helper.js"
+import express from 'express'
 
-const file = "Todos.json"
+const deleteTodo = express.Router()
 
-const Delete = async (req, res) => {
+deleteTodo.delete('/todo/:uuid', async (req, res) => {
     try {
         const uuid = req.params.uuid
         let todos = []
-        read().then(response => {
-            todos = todos.concat(response)
-            const filteredTodos = todos.filter((todo) => todo.uuid !== uuid)
-            write(filteredTodos)
-        })
-            .catch(err => console.log('2', err));
 
+        todos = await read()
+        const filteredTodos = todos.filter((todo) => todo.uuid !== uuid)
+        write(filteredTodos)
         
     } catch (e) {
         res.status(500).json(e)
     }
     
-
     // try {
     //     const {id} = req.params
     //     if (!id) {
@@ -29,6 +26,6 @@ const Delete = async (req, res) => {
     // } catch (e) {
     //     res.status(500).json(e)
     // }
-}
+})
 
-export default Delete
+export default deleteTodo

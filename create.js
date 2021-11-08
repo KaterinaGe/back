@@ -1,7 +1,10 @@
 import { write, read } from "./helper.js";
 import { v4 as uuidv4 } from "uuid";
+import express from 'express'
 
-const Create = async (req, res) => {
+const create = express.Router()
+
+create.post('/todo', async (req, res) => {
     try {
         let todos = []
         const todo = {
@@ -11,13 +14,10 @@ const Create = async (req, res) => {
             created_at: new Date()
         }
 
-        read().then(response => {
-            todos = todos.concat(response)
-            todos.push(todo);
-            write(todos)
-            res.send({todo});
-            })
-            .catch(err => console.log('2', err));
+        todos = await read()
+        todos.push(todo);
+        write(todos)
+        res.send({todo});            
         
     } catch (e) {
         res.status(500).send(e)
@@ -31,7 +31,7 @@ const Create = async (req, res) => {
     // } catch (e) {
     //     res.status(500).json(e)
     // }
-}
+})
 
 
-export default Create;
+export default create;
