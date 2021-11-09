@@ -1,10 +1,8 @@
 import express from 'express'
-import create from './create.js'
-import deleteTodo from './delete.js'
-import getTodos from './get.js';
-import update from './update.js';
-//import mongoose from 'mongoose';
-
+import create from './todo.post.js'
+import deleteTodo from './todo.delete.js'
+import getTodos from './todo.get.js';
+import update from './todo.put.js';
 
 const PORT = 5000;
 
@@ -12,14 +10,4 @@ const app = express()
 
 app.use(express.json())
 app.use('/', create, deleteTodo, getTodos, update)
-
-// async function startApp() {
-//     try {
-//         await mongoose.connect(DB_URL, {useUnifiedTopology: true, useNewUrlParser: true})
-        app.listen(PORT, () => console.log('Its working ' + PORT))
-//     } catch (e) {
-//         console.log(e)
-//     }
-// }
-
-// startApp()
+app.listen(PORT, () => console.log('Its working ' + PORT))

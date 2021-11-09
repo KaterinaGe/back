@@ -15,17 +15,6 @@ deleteTodo.delete('/todo/:uuid', async (req, res) => {
     } catch (e) {
         res.status(500).json(e)
     }
-    
-    // try {
-    //     const {id} = req.params
-    //     if (!id) {
-    //         res.status(400).json({message: 'Id not specified'})
-    //     }
-    //     const post = await Post.findByIdAndDelete(id)
-    //     return res.json(post)
-    // } catch (e) {
-    //     res.status(500).json(e)
-    // }
 })
 
 export default deleteTodo

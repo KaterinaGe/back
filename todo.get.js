@@ -5,6 +5,7 @@ const getTodos = express.Router()
 
 getTodos.get('/todos', async (req, res) => {
     try {
+        
         let todos = []
         todos = await read()
         if (req.query.filterBy === "done") {
@@ -24,14 +25,6 @@ getTodos.get('/todos', async (req, res) => {
     } catch (e) {
         res.status(404).json(e)
     }
-
-
-    // try {
-    //     const posts = await Post.find()
-    //     return res.json(posts)
-    // } catch (e) {
-    //     res.status(500).json(e)
-    // }
 })
 
 export default getTodos

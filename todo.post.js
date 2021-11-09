@@ -20,17 +20,9 @@ create.post('/todo', async (req, res) => {
         res.send({todo});            
         
     } catch (e) {
+        
         res.status(500).send(e)
     }
-
-
-    // try {
-    //     const {uuid, name, create_at, done} = req.body
-    //     const post = await Post.create({uuid, name, create_at, done})
-    //     res.json(post)
-    // } catch (e) {
-    //     res.status(500).json(e)
-    // }
 })
 
 
