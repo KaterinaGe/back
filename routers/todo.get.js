@@ -1,11 +1,10 @@
-import {write, read} from "./helper.js"
+import { read } from "../helper.js"
 import express from 'express'
 
 const getTodos = express.Router()
 
 getTodos.get('/todos', async (req, res) => {
     try {
-        
         let todos = []
         todos = await read()
         if (req.query.filterBy === "done") {
@@ -15,15 +14,14 @@ getTodos.get('/todos', async (req, res) => {
             todos = todos.filter((todo) => todo.done === false)
         }
         if (req.query.order === "asc") {
-            todos = todos.sort((a, b) => a.date - b.date)
+            todos = todos.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at))
         }
         if (req.query.order === "desc") {
-            todos = todos.sort((a, b) => b.date - a.date)
+            todos = todos.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
         }
-        res.send(todos)
-        
+        res.send(todos)  
     } catch (e) {
-        res.status(404).json(e)
+        res.status(500).send(e.message)
     }
 })
 

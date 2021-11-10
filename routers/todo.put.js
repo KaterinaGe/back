@@ -1,4 +1,4 @@
-import {write, read} from "./helper.js"
+import {write, read} from "../helper.js"
 import express from 'express'
 
 const update = express.Router()
@@ -6,7 +6,6 @@ const update = express.Router()
 update.put('/todo/:uuid', async (req, res) => {
     try {
         let todos = []
-        
         todos = await read()
         todos = todos.map((todo) => {
             if (todo.uuid === req.params.uuid) {
@@ -15,11 +14,10 @@ update.put('/todo/:uuid', async (req, res) => {
             }
             return todo
         })
-        write(todos)
-        res.send(todos)
-        
+        await write(todos)
+        res.send('You change this todo')            
     } catch (e) {
-        res.status(500).json(e)
+        res.status(500).send(e.message)
     }
 })
 
